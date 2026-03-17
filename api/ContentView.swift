@@ -1,24 +1,17 @@
-//
-//  ContentView.swift
-//  api
-//
-//  Created by Екатерина Исаева on 16.03.2026.
-//
 
 import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            List {
+                NavigationLink("Show dic from deepSeek") {
+                    DicView()
+                }
+                NavigationLink("Show smth from me") {
+                    SmView()
+                }
+            }
         }
-        .padding()
     }
-}
-
-#Preview {
-    ContentView()
 }
