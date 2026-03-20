@@ -25,17 +25,26 @@ struct SmView: View {
     @State private var errorMessage = ""
     
     var body: some View {
-        VStack {
-            Text ("Random dogs fact")
-            Button("Show fact") {
-                searchFact()
-            }
-            if let result = result {
-                VStack{
-                    Text(result.fact)
+        VStack (spacing: 20) {
+            Text ("Random cats fact")
+                .titleView()
+            VStack {
+                Button("Show facts") {
+                    searchFact()
+                }
+                .buttonStyle(.bordered)
+                .foregroundStyle(.primary)
+                if let result = result {
+                    VStack{
+                        Text(result.fact)
+                            .textView()
+                    }
                 }
             }
+            .padding(.horizontal)
         }
+        .padding()
+        
     }
     
     func searchFact() {
@@ -75,5 +84,35 @@ struct SmView: View {
                 }
             }
         }.resume()
+    }
+}
+ // MARK: - Text ViewModifier
+
+struct TextView: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.caption2)
+            .padding(10)
+            .foregroundColor(.pink)
+    }
+}
+
+struct TitleView: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(Font.largeTitle.bold())
+            .foregroundStyle(.pink)
+    }
+}
+
+extension View {
+    func textView() -> some View {
+        modifier(TextView())
+    }
+}
+
+extension View {
+    func titleView() -> some View {
+        modifier(TitleView())
     }
 }
